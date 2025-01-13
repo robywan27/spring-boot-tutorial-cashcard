@@ -30,17 +30,16 @@ public class CashCardJsonTest {
         );
     }
 
-    // TODO: fix this test, expected.json cannot be found
-//    @Test
-//    void cashCardSerializationTest() throws IOException {
-//        CashCard cashCard = cashCards[0];
-//
-//        assertThat(json.write(cashCard)).isStrictlyEqualToJson("expected.json");
-//        assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.id");
-//        assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.id").isEqualTo(99);
-//        assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.amount");
-//        assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.amount").isEqualTo(123.45);
-//    }
+    @Test
+    void cashCardSerializationTest() throws IOException {
+        CashCard cashCard = cashCards[0];
+
+        assertThat(json.write(cashCard)).isStrictlyEqualToJson("single.json");
+        assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.id");
+        assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.id").isEqualTo(99);
+        assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.amount");
+        assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.amount").isEqualTo(123.45);
+    }
 
     @Test
     void cashCardDeserializationTest() throws IOException {
@@ -57,11 +56,10 @@ public class CashCardJsonTest {
         assertThat(json.parseObject(expected).amount()).isEqualTo(123.45);
     }
 
-    // TODO: fix the test, Unable to load JSON from class path resource [example/cashcard/list.json]
-//    @Test
-//    void cashCardListSerializationTest() throws IOException {
-//        assertThat(jsonList.write(cashCards)).isStrictlyEqualToJson("list.json");
-//    }
+    @Test
+    void cashCardListSerializationTest() throws IOException {
+        assertThat(jsonList.write(cashCards)).isStrictlyEqualToJson("list.json");
+    }
 
     @Test
     void cashCardListDeserializationTest() throws IOException {
