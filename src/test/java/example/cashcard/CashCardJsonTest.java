@@ -17,7 +17,7 @@ public class CashCardJsonTest {
     private JacksonTester<CashCard> json;
 
     @Autowired
-    private JacksonTester<CashCard> jsonList;
+    private JacksonTester<CashCard[]> jsonList;
 
     private CashCard[] cashCards;
 
@@ -57,22 +57,21 @@ public class CashCardJsonTest {
         assertThat(json.parseObject(expected).amount()).isEqualTo(123.45);
     }
 
-    // TODO: fix the test "incompatible types: CashCard[] cannot be converted to CashCard"
+    // TODO: fix the test, Unable to load JSON from class path resource [example/cashcard/list.json]
 //    @Test
 //    void cashCardListSerializationTest() throws IOException {
 //        assertThat(jsonList.write(cashCards)).isStrictlyEqualToJson("list.json");
 //    }
 
-    // TODO: fix test "Cannot deserialize value of type `example.cashcard.CashCard` from Array value (token `JsonToken.START_ARRAY`)"
-//    @Test
-//    void cashCardListDeserializationTest() throws IOException {
-//        String expected = """
-//                [
-//                    { "id": 99, "amount": 123.45, "owner": "sarah1" },
-//                    { "id": 100, "amount": 1.00, "owner": "sarah1" },
-//                    { "id": 101, "amount": 150.00, "owner": "sarah1" }
-//                ]
-//                """;
-//        assertThat(jsonList.parse(expected)).isEqualTo(cashCards);
-//    }
+    @Test
+    void cashCardListDeserializationTest() throws IOException {
+        String expected = """
+                [
+                    { "id": 99, "amount": 123.45, "owner": "sarah1" },
+                    { "id": 100, "amount": 1.00, "owner": "sarah1" },
+                    { "id": 101, "amount": 150.00, "owner": "sarah1" }
+                ]
+                """;
+        assertThat(jsonList.parse(expected)).isEqualTo(cashCards);
+    }
 }
